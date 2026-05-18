@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Filter, Grid, List, ChevronLeft, ChevronRight } from "lucide-react";
+import { Filter, Grid, List } from "lucide-react";
 import type { Product } from "@/mocks/Products.mock";
 import FilterSidebar from "./FilterSidebat";
 import ProductCard from "./ProductCard";
@@ -17,6 +17,7 @@ export const ProductsGrid = ({ products }: Props) => {
   const viewMode = searchParams.get("viewMode") || "grid";
 
   const handleSetViewMode = (mode: "grid" | "list") => {
+    //persistencia URL
     setSearchParams((prev) => {
       prev.set("viewMode", mode);
       return prev;
@@ -96,7 +97,7 @@ export const ProductsGrid = ({ products }: Props) => {
               className={
                 viewMode === "grid"
                   ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-                  : "space-y-4"
+                  : "space-y-2"
               }
             >
               {products.map((product) => (
