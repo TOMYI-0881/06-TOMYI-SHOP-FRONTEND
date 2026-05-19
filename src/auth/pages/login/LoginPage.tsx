@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CustomLoginCarousel } from "@/auth/components/CustomLoginCarousel";
+import { CustomLogo } from "@/components/custom/CustomLogo";
 
 export function LoginPage({
   className,
@@ -16,7 +17,7 @@ export function LoginPage({
           <form className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">Welcome back</h1>
+                <CustomLogo />
                 <p className="text-balance text-muted-foreground">
                   Login to your Acme Inc account
                 </p>
@@ -96,8 +97,6 @@ export function LoginPage({
         By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
         and <a href="#">Privacy Policy</a>.
       </div>
-
-      <CustomLoginCarousel />
     </div>
   );
 }

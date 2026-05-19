@@ -1,23 +1,25 @@
-import { Carousel } from "flowbite-react";
+import { useEffect, useState } from "react";
 
 const images = ["/TOMYI.png", "/TOMYI2.png", "/TOMYI3.png"];
 
 export const CustomLoginCarousel = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    }, 4000); // cambia cada 4 segundos
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
-      <Carousel
-        onSlideChange={(index) => console.log("onSlideChange()", index)}
-      >
-        <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-          Slide 1
-        </div>
-        <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-          Slide 2
-        </div>
-        <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-          Slide 3
-        </div>
-      </Carousel>
+    <div className="w-full h-full overflow-hidden rounded-xl">
+      <img
+        src={images[currentImage]}
+        alt="Login image"
+        className="w-full h-full object-cover transition-all duration-500"
+      />
     </div>
   );
 };
