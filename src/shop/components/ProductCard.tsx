@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+
+type ViewMode = "grid" | "list";
 
 interface ProductCardProps {
   id: string;
@@ -7,6 +10,7 @@ interface ProductCardProps {
   price: number;
   image: string;
   category: string;
+  viewMode?: ViewMode;
 }
 
 const ProductsCard = ({
@@ -15,11 +19,28 @@ const ProductsCard = ({
   price,
   image,
   category,
+  viewMode = "grid",
 }: ProductCardProps) => {
+  const isListView = viewMode === "list";
+
   return (
-    <Card className="group border-0 shadow-none product-card-hover cursor-pointer">
-      <CardContent className="p-0">
-        <div className="relative aspect-square overflow-hidden bg-muted rounded-lg">
+    <Card
+      className={cn(
+        "group border-0 shadow-none product-card-hover cursor-pointer",
+        isListView && "w-full",
+      )}
+    >
+      <CardContent className={cn(
+        "p-0",
+        isListView && "flex flex-row gap-4 p-4"
+      )}>
+        {/* Image Container */}
+        <div
+          className={cn(
+            "relative overflow-hidden bg-muted rounded-lg",
+            isListView ? "w-40 h-40 flex-shrink-0" : "aspect-square",
+          )}
+        >
           <img
             src={image}
             alt={name}
@@ -28,22 +49,53 @@ const ProductsCard = ({
           <div className="image-overlay" />
         </div>
 
-        <div className="pt-6 px-4 pb-4 space-y-3">
-          <div className="space-y-1">
-            <h3 className="font-medium text-sm tracking-tight">{name}</h3>
-            <p className="text-xs text-muted-foreground uppercase">
-              {category}
-            </p>
+        {/* Content Container */}
+        <div
+          className={cn(
+            isListView && "flex flex-col flex-1 justify-between py-2",
+          )}
+        >
+          <div
+            className={cn(
+              isListView ? "space-y-2" : "pt-6 px-4 pb-4 space-y-3",
+            )}
+          >
+            <div className={cn(isListView ? "space-y-0.5" : "space-y-1")}>
+              <h3
+                className={cn(
+                  "font-medium tracking-tight",
+                  isListView ? "text-base" : "text-sm",
+                )}
+              >
+                {name}
+              </h3>
+              <p className="text-xs text-muted-foreground uppercase">
+                {category}
+              </p>
+            </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <p className="font-semibold text-lg">${price}</p>
+          {/* Footer: Price and Button */}
+          <div
+            className={cn(
+              "flex items-center justify-between",
+              !isListView && "px-4 pb-4",
+            )}
+          >
+            <p className="font-semibold text-lg">
+              ${price}
+            </p>
             <Button
               size="sm"
               variant="outline"
-              className="opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-primary/20 text-xs px-4 py-2 h-8"
+              className={cn(
+                "transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-primary/20",
+                isListView
+                  ? "opacity-100 text-xs px-3 py-1 h-7"
+                  : "opacity-0 group-hover:opacity-100 text-xs px-4 py-2 h-8",
+              )}
             >
-              Agregar al carrito
+              Agregar
             </Button>
           </div>
         </div>

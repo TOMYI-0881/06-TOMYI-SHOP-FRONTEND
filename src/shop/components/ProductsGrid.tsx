@@ -97,7 +97,7 @@ export const ProductsGrid = ({ products }: Props) => {
               className={
                 viewMode === "grid"
                   ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-                  : "space-y-2"
+                  : "space-y-4"
               }
             >
               {products.map((product) => (
@@ -108,6 +108,7 @@ export const ProductsGrid = ({ products }: Props) => {
                   price={product.price}
                   image={product.image}
                   category={product.category}
+                  viewMode={viewMode as "grid" | "list"}
                 />
               ))}
             </div>

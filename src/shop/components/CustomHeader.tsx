@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useRef } from "react";
 import { Link, useParams, useSearchParams } from "react-router";
 import { cn } from "@/lib/utils";
+import { CustomLogo } from "@/components/custom/CustomLogo";
 export const CustomHeader = () => {
   const [searchParmas, setSearchParams] = useSearchParams();
   const { gender } = useParams();
@@ -39,9 +40,7 @@ export const CustomHeader = () => {
             <Button variant="ghost" size="icon" className="md:hidden">
               <Menu className="h-5 w-5" />
             </Button>
-            <h1 className="text-xl font-semibold tracking-tight">
-              TOMYI STYLE
-            </h1>
+            <CustomLogo />
           </div>
 
           {/* Navigation - Desktop */}
