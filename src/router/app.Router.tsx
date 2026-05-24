@@ -6,12 +6,9 @@ import { HomePage } from "../shop/pages/home/HomePage";
 import { ProductPage } from "../shop/pages/product/ProductPage";
 import { GenderPage } from "../shop/pages/gender/GenderPage";
 
-import { LoginPage } from "../auth/pages/login/LoginPage";
-import { RegisterPage } from "../auth/pages/register/RegisterPage";
-
-import { DashboardPage } from "../admin/pages/dashboard/DashboardPage";
 import { AdminProductPage } from "../admin/pages/product/AdminProductPage";
 import { AdminProductsPage } from "../admin/pages/products/AdminProductsPage";
+import { DashboardPage } from "@/admin/pages/dashboard/DashboardPage";
 
 const AuthLayout = lazy(() => import("../auth/layouts/AuthLayout"));
 const AdminLayout = lazy(() => import("../admin/layouts/AdminLayout"));
@@ -48,11 +45,11 @@ export const appRouter = createBrowserRouter([
       },
       {
         path: "login",
-        element: <LoginPage />,
+        element: <></>,
       },
       {
         path: "register",
-        element: <RegisterPage />,
+        element: <></>,
       },
     ],
   },
