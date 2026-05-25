@@ -12,6 +12,7 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
+import { CustomLogo } from "@/components/custom/CustomLogo";
 
 const items = [
   { icon: Home, label: "Panel", active: true },
@@ -50,18 +51,7 @@ const Sidebar = ({ mobileOpen = false, onClose }: SidebarProps) => {
         `}
       >
         <div className="h-16 px-4 border-b border-sidebar-border flex items-center justify-between">
-          {!collapsed && (
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-md bg-primary/15 border border-primary/30 flex items-center justify-center">
-                <span className="text-primary font-semibold tracking-tight">
-                  A
-                </span>
-              </div>
-              <span className="text-sidebar-foreground font-semibold tracking-tight">
-                Atelier
-              </span>
-            </div>
-          )}
+          {!collapsed && <CustomLogo subtitle="Admin" />}
           <div className="flex items-center gap-2">
             <button
               onClick={() => setCollapsed((c) => !c)}

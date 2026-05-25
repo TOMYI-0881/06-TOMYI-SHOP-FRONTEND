@@ -13,6 +13,7 @@ import TrafficChart from "@/admin/components/componentsDashboard/TrafficChart";
 
 import QuickActions from "@/admin/components/componentsDashboard/QuickActions";
 import { ActivityFeed } from "@/admin/components/componentsDashboard/ActivityFeed";
+import { AdminTitle } from "@/admin/components/AdminTitle";
 
 const stats = [
   {
@@ -88,10 +89,10 @@ export const DashboardPage = () => {
         <h1 className="mt-2 text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
           Bienvenido de nuevo, Thomas!
         </h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Aquí tienes una vista refinada de lo que está pasando con tu negocio
-          hoy.
-        </p>
+        <AdminTitle
+          title="Panel de Control"
+          description="Aquí tienes una vista refinada de lo que está pasando con tu negocio hoy."
+        />
       </div>
 
       <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-5">
