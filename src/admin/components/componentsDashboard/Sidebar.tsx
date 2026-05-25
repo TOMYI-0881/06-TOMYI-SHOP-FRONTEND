@@ -13,16 +13,17 @@ import {
   X,
 } from "lucide-react";
 import { CustomLogo } from "@/components/custom/CustomLogo";
+import { Link, useLocation } from "react-router";
 
 const items = [
-  { icon: Home, label: "Panel", active: true },
-  { icon: BarChart3, label: "Analíticas" },
-  { icon: Users, label: "Usuarios" },
-  { icon: ShoppingCart, label: "Pedidos" },
-  { icon: FileText, label: "Reportes" },
-  { icon: Bell, label: "Notificaciones" },
-  { icon: Settings, label: "Ajustes" },
-  { icon: HelpCircle, label: "Ayuda" },
+  { icon: Home, label: "Dashboard", to: "/admin" },
+  { icon: BarChart3, label: "Productos", to: "/admin/products" },
+  { icon: Users, label: "Usuarios", to: "/users" },
+  { icon: ShoppingCart, label: "Pedidos", to: "/orders" },
+  { icon: FileText, label: "Reportes", to: "/reports" },
+  { icon: Bell, label: "Notificaciones", to: "/notifications" },
+  { icon: Settings, label: "Ajustes", to: "/settings" },
+  { icon: HelpCircle, label: "Ayuda", to: "/help" },
 ];
 
 interface SidebarProps {
@@ -32,6 +33,11 @@ interface SidebarProps {
 
 const Sidebar = ({ mobileOpen = false, onClose }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(false);
+  const { pathname } = useLocation();
+
+  const isActiveRoute = (to: string) => {
+    return pathname === to;
+  };
 
   return (
     <>
@@ -80,22 +86,22 @@ const Sidebar = ({ mobileOpen = false, onClose }: SidebarProps) => {
               const Icon = item.icon;
               return (
                 <li key={item.label}>
-                  <a
-                    href="#"
+                  <Link
+                    to={item.to || "/admin"}
                     className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition-colors ${
-                      item.active
-                        ? "bg-sidebar-accent text-sidebar-foreground"
+                      isActiveRoute(item.to)
+                        ? "bg-primary text-white"
                         : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
                     }`}
                   >
-                    {item.active && (
+                    {item.to && (
                       <span className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-r bg-primary" />
                     )}
                     <Icon size={18} className="shrink-0" />
                     {!collapsed && (
                       <span className="font-medium">{item.label}</span>
                     )}
-                  </a>
+                  </Link>
                 </li>
               );
             })}

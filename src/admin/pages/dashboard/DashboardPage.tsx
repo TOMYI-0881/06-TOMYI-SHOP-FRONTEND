@@ -90,7 +90,7 @@ export const DashboardPage = () => {
           Bienvenido de nuevo, Thomas!
         </h1>
         <AdminTitle
-          title="Panel de Control"
+          title="Dashboard"
           description="Aquí tienes una vista refinada de lo que está pasando con tu negocio hoy."
         />
       </div>
