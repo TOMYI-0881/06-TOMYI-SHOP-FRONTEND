@@ -20,7 +20,7 @@ const TrafficChart = () => {
 
       <div className="flex items-center gap-6">
         <div className="h-44 w-44 relative shrink-0">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height={176}>
             <PieChart>
               <Pie
                 data={data}

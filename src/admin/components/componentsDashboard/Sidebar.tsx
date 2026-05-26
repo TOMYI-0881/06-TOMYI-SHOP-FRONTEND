@@ -35,6 +35,8 @@ const Sidebar = ({ mobileOpen = false, onClose }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(false);
   const { pathname } = useLocation();
 
+  console.log(pathname);
+
   const isActiveRoute = (to: string) => {
     if (pathname.includes("/admin/products/") && to === "/admin/products") {
       return true;

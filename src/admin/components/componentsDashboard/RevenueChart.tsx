@@ -45,8 +45,8 @@ const RevenueChart = () => {
         </div>
       </div>
 
-      <div className="h-72">
-        <ResponsiveContainer width="100%" height="100%">
+      <div className="h-72 w-full">
+        <ResponsiveContainer width="100%" height={288}>
           <AreaChart
             data={data}
             margin={{ top: 8, right: 8, left: -16, bottom: 0 }}

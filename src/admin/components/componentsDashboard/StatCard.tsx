@@ -48,7 +48,7 @@ const StatCard = ({
           <span>{change}</span>
         </div>
         <div className="h-10 w-24">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height={40} minWidth={0}>
             <AreaChart
               data={data}
               margin={{ top: 4, right: 0, left: 0, bottom: 0 }}
