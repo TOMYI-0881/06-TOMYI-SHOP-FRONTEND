@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import type { Size } from "@/interfaces/product.intertface";
 import { cn } from "@/lib/utils";
 
 type ViewMode = "grid" | "list";
@@ -10,15 +11,16 @@ interface ProductCardProps {
   price: number;
   image: string;
   category: string;
+  sizes: Size[];
   viewMode?: ViewMode;
 }
 
 const ProductsCard = ({
-  id,
   name,
   price,
   image,
   category,
+  sizes,
   viewMode = "grid",
 }: ProductCardProps) => {
   const isListView = viewMode === "list";
@@ -30,10 +32,9 @@ const ProductsCard = ({
         isListView && "w-full",
       )}
     >
-      <CardContent className={cn(
-        "p-0",
-        isListView && "flex flex-row gap-4 p-4"
-      )}>
+      <CardContent
+        className={cn("p-0", isListView && "flex flex-row gap-4 p-4")}
+      >
         {/* Image Container */}
         <div
           className={cn(
@@ -70,7 +71,8 @@ const ProductsCard = ({
                 {name}
               </h3>
               <p className="text-xs text-muted-foreground uppercase">
-                {category}
+                {category} -{" "}
+                <span className="font-bold">{sizes.join(",")}</span>
               </p>
             </div>
           </div>
@@ -82,9 +84,7 @@ const ProductsCard = ({
               !isListView && "px-4 pb-4",
             )}
           >
-            <p className="font-semibold text-lg">
-              ${price}
-            </p>
+            <p className="font-semibold text-lg">${price}</p>
             <Button
               size="sm"
               variant="outline"
