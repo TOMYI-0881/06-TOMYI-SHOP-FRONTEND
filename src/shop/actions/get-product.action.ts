@@ -6,16 +6,20 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 interface Options {
   limit?: string | number;
   offset?: string | number;
+  gender?: string;
+  sizes?: string;
 }
 
 export const getProductAction = async (
   options: Options,
 ): Promise<ProductResponse> => {
-  const { limit, offset } = options;
+  const { limit, offset, gender, sizes } = options;
   const { data } = await tesloApi.get<ProductResponse>("/products", {
     params: {
+      gender,
       limit,
       offset,
+      sizes,
     },
   });
 
