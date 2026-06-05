@@ -4,7 +4,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useSearchParams } from "react-router";
 
-const FilterPriceProps: string[] = ["any", "0-50", "50-100", "100-200", "200+"];
+const FilterPriceProps: string[] = [
+  "any",
+  "25-50",
+  "50-100",
+  "100-200",
+  "200+",
+];
 
 const sizes = [
   { id: "xs", label: "XS" },
@@ -23,6 +29,8 @@ const FilterSidebar = () => {
   const filterPrice = FilterPriceProps.includes(currentPrice)
     ? currentPrice
     : "any";
+
+  console.log(currentSizes);
 
   //funcion para manejar el cambio de talla, agregando o quitando la talla seleccionada del array de tallas actuales y persistiendo el cambio en la URL
   const handleSizeChanged = (size: string) => {
@@ -97,13 +105,13 @@ const FilterSidebar = () => {
           </div>
           <div className="flex items-center space-x-2">
             <RadioGroupItem
-              value="0-50"
+              value="25-50"
               id="price1"
-              checked={filterPrice === "0-50"}
-              onClick={() => handlePriceChange("0-50")}
+              checked={filterPrice === "25-50"}
+              onClick={() => handlePriceChange("25-50")}
             />
             <Label htmlFor="price1" className="text-sm cursor-pointer">
-              $0 - $50
+              $25 - $50
             </Label>
           </div>
           <div className="flex items-center space-x-2">

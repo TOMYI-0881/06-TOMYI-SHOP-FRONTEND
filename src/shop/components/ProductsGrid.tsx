@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import { useSearchParams } from "react-router";
 import { useState } from "react";
 import type { Product } from "@/interfaces/product.intertface";
+import { ProductNotFound } from "./ProductNotFound";
 
 interface Props {
   products: Product[];
@@ -15,11 +16,20 @@ export const ProductsGrid = ({ products }: Props) => {
   const [showFilters, setShowFilters] = useState(false);
 
   const viewMode = searchParams.get("viewMode") || "grid";
+  const query = searchParams.get("query") || "";
 
   const handleSetViewMode = (mode: "grid" | "list") => {
     //persistencia URL
     setSearchParams((prev) => {
       prev.set("viewMode", mode);
+      return prev;
+    });
+  };
+
+  const clearParams = () => {
+    setSearchParams((prev) => {
+      prev.delete("query");
+
       return prev;
     });
   };
@@ -91,28 +101,36 @@ export const ProductsGrid = ({ products }: Props) => {
           )}
 
           {/* Products Grid */}
-
           <div className="flex-1">
-            <div
-              className={
-                viewMode === "grid"
-                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-                  : "space-y-4"
-              }
-            >
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  name={product.title}
-                  price={product.price}
-                  image={product.images[0]}
-                  category={product.gender}
-                  sizes={product.sizes}
-                  viewMode={viewMode as "grid" | "list"}
+            {products.length === 0 && query.length > 0 ? (
+              <div className="flex min-h-[40vh] items-center justify-start pl-4 lg:pl-63">
+                <ProductNotFound
+                  searchTerm={query}
+                  onClearSearch={clearParams}
                 />
-              ))}
-            </div>
+              </div>
+            ) : (
+              <div
+                className={
+                  viewMode === "grid"
+                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                    : "space-y-4"
+                }
+              >
+                {products.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    id={product.id}
+                    name={product.title}
+                    price={product.price}
+                    image={product.images[0]}
+                    category={product.gender}
+                    sizes={product.sizes}
+                    viewMode={viewMode as "grid" | "list"}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

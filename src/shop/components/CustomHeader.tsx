@@ -11,7 +11,7 @@ export const CustomHeader = () => {
   console.log({ gender });
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const queryParmas = searchParmas.get("query") || "";
+  const queryParams = searchParmas.get("query") || "";
 
   const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key !== "Enter") return;
@@ -93,7 +93,8 @@ export const CustomHeader = () => {
                   className="pl-9 w-64 h-9 bg-white"
                   ref={inputRef}
                   onKeyDown={handleSearch}
-                  defaultValue={queryParmas}
+                  defaultValue={queryParams}
+                  key={queryParams}
                 />
               </div>
             </div>
