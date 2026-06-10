@@ -5,6 +5,7 @@ import { useParams, useSearchParams } from "react-router";
 export const useProduct = () => {
   const [searchParams] = useSearchParams();
   const { gender } = useParams();
+  console.log({ gender });
 
   const limit = searchParams.get("limit") || 9;
   const page = searchParams.get("page") || 1;

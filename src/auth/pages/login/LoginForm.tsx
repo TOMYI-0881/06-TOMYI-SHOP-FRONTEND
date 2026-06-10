@@ -1,9 +1,36 @@
+import { loginAction } from "@/auth/actions/login.action";
 import { SocialButtons } from "@/auth/components/SocialButtons";
 import { CustomLogo } from "@/components/custom/CustomLogo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
-export function LoginForm({ onSwitch }: { onSwitch: () => void }) {
+export const LoginForm = ({ onSwitch }: { onSwitch: () => void }) => {
+  const navigate = useNavigate();
+
+  const [isPosting, setIsPosting] = useState(false);
+
+  const handleLogin = async (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsPosting(true);
+
+    const formData = new FormData(event.target as HTMLFormElement);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      const data = await loginAction(email, password);
+      localStorage.setItem("token", data.token);
+      navigate("/");
+    } catch (error) {
+      console.log({ error });
+      toast.error("Correo o/y contraseña no validos");
+      setIsPosting(false);
+    }
+  };
+
   return (
     <div>
       <CustomLogo />
@@ -11,12 +38,14 @@ export function LoginForm({ onSwitch }: { onSwitch: () => void }) {
         Inicia sesión con tu cuenta.
       </p>
 
-      <form className="mt-8 space-y-5" onSubmit={(e) => e.preventDefault()}>
+      <form className="mt-8 space-y-5" onSubmit={handleLogin}>
         <div>
           <label className="text-sm font-semibold">Correo electrónico</label>
           <Input
             id="email"
             type="email"
+            //el parametro name es para que lo obgenta el formData
+            name="email"
             placeholder="tu@email.com"
             className="mt-2 h-11 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
             required
@@ -35,6 +64,8 @@ export function LoginForm({ onSwitch }: { onSwitch: () => void }) {
           <Input
             id="password"
             type="password"
+            //el parametro name es para que lo obgenta el formData
+            name="password"
             className="mt-2 h-11 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
             required
           />
@@ -42,6 +73,7 @@ export function LoginForm({ onSwitch }: { onSwitch: () => void }) {
         <Button
           className="h-11 w-full rounded-md bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
           type="submit"
+          disabled={isPosting}
         >
           Iniciar sesión
         </Button>
@@ -61,4 +93,4 @@ export function LoginForm({ onSwitch }: { onSwitch: () => void }) {
       </p>
     </div>
   );
-}
+};
