@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProductAction } from "../actions/get-product.action";
+import { getProductsAction } from "../actions/get-products.action";
 import { useParams, useSearchParams } from "react-router";
 
-export const useProduct = () => {
+export const useProducts = () => {
   const [searchParams] = useSearchParams();
   const { gender } = useParams();
   console.log({ gender });
@@ -19,20 +19,20 @@ export const useProduct = () => {
   switch (price) {
     case "any":
       break;
-    case "25-50":
-      minPrice = 25;
-      maxPrice = 50;
+    case "87000-177000":
+      minPrice = 87000;
+      maxPrice = 177000;
       break;
-    case "50-100":
-      minPrice = 50;
-      maxPrice = 100;
+    case "177000-354000":
+      minPrice = 177000;
+      maxPrice = 354000;
       break;
-    case "100-200":
-      minPrice = 100;
-      maxPrice = 200;
+    case "354000-707000":
+      minPrice = 354000;
+      maxPrice = 707000;
       break;
-    case "200+":
-      minPrice = 200;
+    case "707000+":
+      minPrice = 707000;
       maxPrice = undefined;
       break;
   }
@@ -53,7 +53,7 @@ export const useProduct = () => {
       },
     ],
     queryFn: () =>
-      getProductAction({
+      getProductsAction({
         gender: gender,
         limit: isNaN(+limit) ? 9 : limit,
         offset: isNaN(offset) ? 0 : offset,

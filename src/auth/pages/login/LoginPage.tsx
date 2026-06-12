@@ -1,11 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { LoginForm } from "@/auth/pages/login/LoginForm";
 import { RegisterForm } from "@/auth/pages/register/RegisterPage";
 
-type Mode = "login" | "register";
-
-const ANIM_MS = 1100;
 const IMAGES = [
   "/TOMYI.png",
   "/oferta_1.png",
@@ -15,7 +12,7 @@ const IMAGES = [
 ];
 const CAROUSEL_MS = 4500;
 
-function getModeFromPath(pathname: string): Mode {
+function getModeFromPath(pathname: string): "login" | "register" {
   return pathname.endsWith("register") ? "register" : "login";
 }
 
@@ -24,20 +21,8 @@ export function LoginPage() {
   const navigate = useNavigate();
 
   const mode = getModeFromPath(location.pathname);
-  const [displayMode, setDisplayMode] = useState<Mode>(() =>
-    getModeFromPath(location.pathname),
-  );
   const [slide, setSlide] = useState(0);
   const isRegister = mode === "register";
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    if (mode === displayMode) return;
-    timeoutRef.current = setTimeout(() => setDisplayMode(mode), ANIM_MS / 2);
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [mode, displayMode]);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -46,10 +31,9 @@ export function LoginPage() {
     return () => clearInterval(id);
   }, []);
 
-  const switchTo = (next: Mode) => {
+  const switchTo = (next: "login" | "register") => {
     navigate(next === "register" ? "/auth/register" : "/auth/login");
   };
-  const showRegister = displayMode === "register";
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-muted/40 p-4">
@@ -77,15 +61,14 @@ export function LoginPage() {
           <div
             className={`relative md:absolute top-0 h-auto md:h-full w-full md:w-1/2 flex items-center justify-center p-6 md:p-10 md:transition-[left] md:duration-[1100ms] md:ease-[cubic-bezier(0.65,0,0.35,1)] ${isRegister ? "md:left-1/2" : "md:left-0"}`}
           >
-            <div
-              key={displayMode}
-              className="w-full max-w-sm animate-fade-in-up"
-            >
-              {showRegister ? (
-                <RegisterForm onSwitch={() => switchTo("login")} />
-              ) : (
-                <LoginForm onSwitch={() => switchTo("register")} />
-              )}
+            <div className="w-full max-w-sm">
+              <div key={mode} className="animate-in fade-in duration-300">
+                {isRegister ? (
+                  <RegisterForm onSwitch={() => switchTo("login")} />
+                ) : (
+                  <LoginForm onSwitch={() => switchTo("register")} />
+                )}
+              </div>
             </div>
           </div>
         </div>

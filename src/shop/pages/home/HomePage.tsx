@@ -1,10 +1,10 @@
 import CustomPagination from "@/components/custom/CustomPagination";
 import { CustomJumbotron } from "@/shop/components/CustomJumbotron";
 import { ProductsGrid } from "@/shop/components/ProductsGrid";
-import { useProduct } from "@/shop/hooks/useProduct";
+import { useProducts } from "@/shop/hooks/useProducts";
 
 export const HomePage = () => {
-  const { data } = useProduct();
+  const { data } = useProducts();
 
   console.log(data);
   return (

@@ -32,7 +32,7 @@ export const CustomHeader = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b backdrop-blur bg-slate-50">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}

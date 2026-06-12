@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Size } from "@/interfaces/product.intertface";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router";
 
 type ViewMode = "grid" | "list";
 
@@ -16,6 +17,7 @@ interface ProductCardProps {
 }
 
 const ProductsCard = ({
+  id,
   name,
   price,
   image,
@@ -24,6 +26,12 @@ const ProductsCard = ({
   viewMode = "grid",
 }: ProductCardProps) => {
   const isListView = viewMode === "list";
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/gender/${category}/product/${id}`);
+  };
 
   return (
     <Card
@@ -43,6 +51,7 @@ const ProductsCard = ({
           )}
         >
           <img
+            onClick={handleClick}
             src={image}
             alt={name}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
@@ -84,7 +93,9 @@ const ProductsCard = ({
               !isListView && "px-4 pb-4",
             )}
           >
-            <p className="font-semibold text-lg">${price}</p>
+            <p className="font-semibold text-lg">
+              ${price.toLocaleString("es-CO")}
+            </p>
             <Button
               size="sm"
               variant="outline"

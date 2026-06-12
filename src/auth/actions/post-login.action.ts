@@ -1,7 +1,7 @@
 import { tesloApi } from "@/api/TesloApi";
 import type { AuthResponse } from "../interfaces/auth.response";
 
-export const loginAction = async (
+export const postLoginAction = async (
   email: string,
   password: string,
 ): Promise<AuthResponse> => {

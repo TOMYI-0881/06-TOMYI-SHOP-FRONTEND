@@ -5,12 +5,16 @@ export interface Product {
   title: string;
   price: number;
   description: string;
+  descriptionDetails: string;
   slug: string;
   stock: number;
   sizes: Size[];
   gender: Gender;
   tags: String[];
   images: string[];
+  colors: { name: string; hex: string }[];
+  details: string[];
+
   user: User;
 }
 

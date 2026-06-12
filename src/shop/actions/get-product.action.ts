@@ -1,38 +1,16 @@
 import { tesloApi } from "@/api/TesloApi";
-import type { ProductResponse } from "@/interfaces/products.response";
+import type { Product } from "@/interfaces/product.intertface";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-interface Options {
-  limit?: string | number;
-  offset?: string | number;
-  gender?: string;
-  sizes?: string;
-  minPrice?: number;
-  maxPrice?: number;
-  q?: string;
-}
+export const getProductAction = async (id: string): Promise<Product> => {
+  const { data } = await tesloApi.get<Product>(`/products/${id}`);
 
-export const getProductAction = async (
-  options: Options,
-): Promise<ProductResponse> => {
-  const { limit, offset, gender, sizes, minPrice, maxPrice, q } = options;
-  const { data } = await tesloApi.get<ProductResponse>("/products", {
-    params: {
-      gender,
-      limit,
-      offset,
-      sizes,
-      minPrice,
-      maxPrice,
-      q,
-    },
-  });
-
-  const productWithImageUrls = data.products.map((product) => ({
-    ...product,
-    images: product.images.map((image) => `${BASE_URL}/files/product/${image}`),
-  }));
-
-  return { ...data, products: productWithImageUrls };
+  const productWithImageUrls = data.images.map(
+    (image) => `${BASE_URL}/files/product/${image}`,
+  );
+  return {
+    ...data,
+    images: productWithImageUrls,
+  };
 };

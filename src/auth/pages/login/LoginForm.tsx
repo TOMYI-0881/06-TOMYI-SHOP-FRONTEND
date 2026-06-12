@@ -1,4 +1,4 @@
-import { loginAction } from "@/auth/actions/login.action";
+import { postLoginAction } from "@/auth/actions/post-login.action";
 import { SocialButtons } from "@/auth/components/SocialButtons";
 import { CustomLogo } from "@/components/custom/CustomLogo";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,8 @@ export const LoginForm = ({ onSwitch }: { onSwitch: () => void }) => {
     const password = formData.get("password") as string;
 
     try {
-      const data = await loginAction(email, password);
+      const data = await postLoginAction(email, password);
+      console.log({ data });
       localStorage.setItem("token", data.token);
       navigate("/");
     } catch (error) {

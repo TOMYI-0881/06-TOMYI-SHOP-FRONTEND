@@ -6,10 +6,10 @@ import { useSearchParams } from "react-router";
 
 const FilterPriceProps: string[] = [
   "any",
-  "25-50",
-  "50-100",
-  "100-200",
-  "200+",
+  "87000-177000",
+  "177000-354000",
+  "354000-707000",
+  "707000+",
 ];
 
 const sizes = [
@@ -105,46 +105,46 @@ const FilterSidebar = () => {
           </div>
           <div className="flex items-center space-x-2">
             <RadioGroupItem
-              value="25-50"
+              value="87000-177000"
               id="price1"
-              checked={filterPrice === "25-50"}
-              onClick={() => handlePriceChange("25-50")}
+              checked={filterPrice === "87000-177000"}
+              onClick={() => handlePriceChange("87000-177000")}
             />
             <Label htmlFor="price1" className="text-sm cursor-pointer">
-              $25 - $50
+              $87.000 - $177.000
             </Label>
           </div>
           <div className="flex items-center space-x-2">
             <RadioGroupItem
-              value="50-100"
+              value="177000-354000"
               id="price2"
-              checked={filterPrice === "50-100"}
-              onClick={() => handlePriceChange("50-100")}
+              checked={filterPrice === "177000-354000"}
+              onClick={() => handlePriceChange("177000-354000")}
             />
             <Label htmlFor="price2" className="text-sm cursor-pointer">
-              $50 - $100
+              $87.000 - $354.000
             </Label>
           </div>
           <div className="flex items-center space-x-2">
             <RadioGroupItem
-              value="100-200"
+              value="354000-707000"
               id="price3"
-              checked={filterPrice === "100-200"}
-              onClick={() => handlePriceChange("100-200")}
+              checked={filterPrice === "354000-707000"}
+              onClick={() => handlePriceChange("354000-707000")}
             />
             <Label htmlFor="price3" className="text-sm cursor-pointer">
-              $100 - $200
+              $354.000 - $707.000
             </Label>
           </div>
           <div className="flex items-center space-x-2">
             <RadioGroupItem
-              value="200+"
+              value="707000+"
               id="price4"
-              checked={filterPrice === "200+"}
-              onClick={() => handlePriceChange("200+")}
+              checked={filterPrice === "707000+"}
+              onClick={() => handlePriceChange("707000+")}
             />
             <Label htmlFor="price4" className="text-sm cursor-pointer">
-              $200+
+              $707.000+
             </Label>
           </div>
         </RadioGroup>
